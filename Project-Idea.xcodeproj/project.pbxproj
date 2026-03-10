@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8CA6EBD02F604A9800279A7B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8CA6EBCF2F604A9800279A7B /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		8CA6EB822F602F0500279A7B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,8 @@
 		8CA6EB722F602F0400279A7B /* Project-Idea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project-Idea.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA6EB812F602F0500279A7B /* Project-IdeaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project-IdeaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA6EB8B2F602F0600279A7B /* Project-IdeaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project-IdeaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CA6EBCC2F6048BD00279A7B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8CA6EBCF2F604A9800279A7B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +81,8 @@
 		8CA6EB692F602F0400279A7B = {
 			isa = PBXGroup;
 			children = (
+				8CA6EBCF2F604A9800279A7B /* .gitignore */,
+				8CA6EBCC2F6048BD00279A7B /* README.md */,
 				8CA6EB742F602F0400279A7B /* Project-Idea */,
 				8CA6EB842F602F0500279A7B /* Project-IdeaTests */,
 				8CA6EB8E2F602F0600279A7B /* Project-IdeaUITests */,
@@ -212,6 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CA6EBD02F604A9800279A7B /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
