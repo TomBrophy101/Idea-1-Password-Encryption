@@ -46,7 +46,8 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(timestamp: Date())
+            let encryptedPassword = EncryptionManager.hashPassword(inputPassword)
+            let newItem = Item(title: inputTitle, serviceType: "Item", secureData: encryptedPassword, timestamp: Date())
             modelContext.insert(newItem)
         }
     }
