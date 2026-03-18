@@ -20,24 +20,27 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+                Section("New Entry") {
+                    TextField("Title", text: $inputTitle)
+                    SecureField("Password", text: $inputPassword)
+                    Button("Save to Vault", action: addItem)
+                        .disabled(inputTitle.isEmpty || inputPassword.isEmpty)
                 }
-                .onDelete(perform: deleteItems)
+                Section("Saved Items") {
+                    ForEach(items) { item in
+                        NavigationLink {
+                            Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        } label: {
+                            Text(item.title.isEmpty ? "Untitled" : item.title)
+                        }
+                    }
+                    .onDelete(perform: deleteItems)
+                }
             }
             .navigationTitle("My Passwords")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
                 }
             }
         } detail: {
@@ -46,16 +49,13 @@ struct ContentView: View {
                 Text("Select an item")
             }
         }
+        .navigationSplitViewStyle(.balanced)
     }
 
     private func addItem() {
         withAnimation {
-            let encryptedPassword = EncryptionManager.hashPassword(inputPassword)
-            let newItem = Item(title: inputTitle, serviceType: "Item", secureData: encryptedPassword, timestamp: Date())
+            let newItem = Item(title: "New Password Entry", serviceType: "Login", secureData: "EncryptedData", timestamp: Date())
             modelContext.insert(newItem)
-
-            inputTitle = ""
-            inputPassword = ""
         }
     }
 

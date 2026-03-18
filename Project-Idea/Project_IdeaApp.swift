@@ -30,7 +30,19 @@ struct Project_IdeaApp: App {
             if isUnlocked {
                 ContentView()
             } else {
+                VStack(spacing: 20) {
+                    Image(systemName: "lock.shield")
+                        .font(.system(size: 60))
+                    Text("Vault Locked")
 
+                    Button("Unlock with FaceID") {
+                        tryToUnlock()
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+                .onAppear {
+                    tryToUnlock()
+                }
             }
         }
         .modelContainer(sharedModelContainer)
