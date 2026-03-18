@@ -36,7 +36,7 @@ struct ContentView: View {
                 .listRowBackground(Color.clear)
                 .disabled(inputTitle.isEmpty || inputPassword.isEmpty)
 
-                Section("Saved Items") {
+                Section("Saved Accounts") {
                     ForEach(items) { item in
                         NavigationLink {
                             Text("Secure Data: \(item.secureData)")
