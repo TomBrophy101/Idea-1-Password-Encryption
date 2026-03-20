@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var inputTitle = ""
     @State private var inputPassword = ""
     @State private var current2FACode = "------"
-    @State private var tempEmail = "No Email Generated"
+    @State private var tempEmail = ""
 
     var body: some View {
         NavigationSplitView {
@@ -55,7 +55,6 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Project Idea")
-            .navigationBarBackButtonHidden()
         } detail: {
             Text("Select an item")
         }
