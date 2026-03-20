@@ -35,9 +35,22 @@
 		8CA6EBCF2F604A9800279A7B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8C7383232F6D8A0500630E74 /* Exceptions for "Project-Idea" folder in "Project-Idea" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8CA6EB712F602F0400279A7B /* Project-Idea */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8CA6EB742F602F0400279A7B /* Project-Idea */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8C7383232F6D8A0500630E74 /* Exceptions for "Project-Idea" folder in "Project-Idea" target */,
+			);
 			path = "Project-Idea";
 			sourceTree = "<group>";
 		};
@@ -409,8 +422,10 @@
 				DEVELOPMENT_TEAM = KGJDN4CHC6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Project-Idea/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Project-Idea";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "$(PRODUCT_NAME) uses Face ID";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -446,8 +461,10 @@
 				DEVELOPMENT_TEAM = KGJDN4CHC6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Project-Idea/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Project-Idea";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "$(PRODUCT_NAME) uses Face ID";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
