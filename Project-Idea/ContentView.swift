@@ -21,7 +21,7 @@ struct ContentView: View {
         NavigationSplitView {
             List {
                 Section("Add New Account") {
-                    TextField("Web page or app name", text: $inputTitle)
+                    TextField("Web page or App name", text: $inputTitle)
                     TextField("Enter Email", text: $tempEmail)
                     SecureField("Enter Password", text: $inputPassword)
                 }
