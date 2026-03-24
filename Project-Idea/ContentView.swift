@@ -22,7 +22,6 @@ struct ContentView: View {
             List {
                 Section("Add New Account") {
                     TextField("Web Page or App Name", text: $inputTitle)
-                        .textContentType(.name)
 
                     TextField("Enter Email", text: $tempEmail)
                         .textContentType(.emailAddress)
