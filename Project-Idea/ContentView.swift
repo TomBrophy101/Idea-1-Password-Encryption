@@ -26,6 +26,7 @@ struct ContentView: View {
                         .autocorrectionDisabled()
                         .textContentType(.URL)
                         .keyboardType(.URL)
+                        .textInputAutocapitalization(.never)
 
                     TextField("Enter Email", text: $tempEmail)
                         .textContentType(.emailAddress)
