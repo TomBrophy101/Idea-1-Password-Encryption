@@ -24,6 +24,8 @@ struct ContentView: View {
                     TextField("Web Page or App Name", text: $inputTitle)
                         .textContentType(.organizationName)
                         .autocorrectionDisabled()
+                        .textContentType(.URL)
+                        .keyboardType(.URL)
 
                     TextField("Enter Email", text: $tempEmail)
                         .textContentType(.emailAddress)
