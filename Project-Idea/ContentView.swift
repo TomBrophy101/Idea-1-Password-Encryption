@@ -31,7 +31,7 @@ struct ContentView: View {
                         .textInputAutocapitalization(.never)
 
                     SecureField("Enter Password", text: $inputPassword)
-                        .textContentType(.password)
+                        .textContentType(.newPassword)
                 }
 
                 Button(action: addItem) {
