@@ -43,7 +43,7 @@ struct ContentView: View {
                 .buttonStyle(.borderedProminent)
                 .tint(.blue)
                 .listRowBackground(Color.clear)
-                .disabled(inputTitle.isEmpty || inputPassword.isEmpty)
+                .disabled(inputTitle.isEmpty || inputPassword.isEmpty || tempEmail.isEmpty)
 
                 Section("Saved Accounts") {
                     ForEach(items) { item in
