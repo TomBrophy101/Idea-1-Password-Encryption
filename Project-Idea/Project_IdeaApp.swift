@@ -23,18 +23,22 @@ struct Project_IdeaApp: App {
         }
     }()
 
+    @State private var hasFinishedSplash = false
     @State private var isUnlocked = false
     @State private var showPasswordFallback = false
 
     var body: some Scene {
         WindowGroup {
-            if isUnlocked {
-                ContentView()
-            } else {
+            if !hasFinishedSplash {
+                SplashView(isFinished: $hasFinishedSplash)
+            } else  if !isUnlocked {
                 VStack(spacing: 20) {
                     Image(systemName: "lock.shield")
                         .font(.system(size: 60))
+                        .foregroundColor(.blue)
+
                     Text("Program Locked")
+                        .font(.headline)
 
                     Button("Unlock with Face ID") {
                         tryToUnlock()
@@ -43,14 +47,19 @@ struct Project_IdeaApp: App {
 
                     if showPasswordFallback {
                         Button("Enter Master Password") {
-                            isUnlocked = true
+                            withAnimation { isUnlocked = true }
                         }
                         .padding(.top)
                     }
                 }
                 .onAppear {
-                    tryToUnlock()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        tryToUnlock()
+                    }
                 }
+            } else {
+                ContentView()
+                    .transition(.move(edge: .bottom))
             }
         }
         .modelContainer(sharedModelContainer)

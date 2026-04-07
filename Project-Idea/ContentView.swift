@@ -14,7 +14,7 @@ struct ContentView: View {
 
     @State private var inputTitle = ""
     @State private var inputPassword = ""
-    @State private var current2FACode = "------"
+    @State private var current2FACode = ""
     @State private var tempEmail = ""
 
     var body: some View {
@@ -37,6 +37,8 @@ struct ContentView: View {
 
                     SecureField("Enter Password", text: $inputPassword)
                         .textContentType(.newPassword)
+
+                    SecureField("Enter 2 Factor Code", text: $current2FACode)
                 }
 
                 Button(action: addItem) {
@@ -48,7 +50,7 @@ struct ContentView: View {
                 .buttonStyle(.borderedProminent)
                 .tint(.blue)
                 .listRowBackground(Color.clear)
-                .disabled(inputTitle.isEmpty || inputPassword.isEmpty || tempEmail.isEmpty)
+                .disabled(inputTitle.isEmpty || inputPassword.isEmpty || tempEmail.isEmpty || current2FACode.isEmpty)
 
                 Section("Saved Accounts") {
                     ForEach(items) { item in
@@ -83,7 +85,7 @@ struct ContentView: View {
             let newItem = Item(
                 title: inputTitle,
                 serviceType: "Login",
-                secureData: "Email: \(tempEmail)\nPassword: \(inputPassword)",
+                secureData: "Email: \(tempEmail)\nPassword: \(inputPassword)\n2 Factor Code: \(current2FACode)",
                 timestamp: Date()
             )
             modelContext.insert(newItem)
@@ -91,6 +93,7 @@ struct ContentView: View {
             inputTitle = ""
             tempEmail = ""
             inputPassword = ""
+            current2FACode = ""
         }
     }
 
