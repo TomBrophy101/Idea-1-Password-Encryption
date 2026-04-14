@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var inputPassword = ""
     @State private var current2FACode = ""
     @State private var tempEmail = ""
+    @State private var expectedCode = ""
 
     var body: some View {
         NavigationSplitView {
@@ -38,9 +39,19 @@ struct ContentView: View {
                     SecureField("Enter Password", text: $inputPassword)
                         .textContentType(.newPassword)
 
-                    SecureField("Enter 2 Factor Code", text: $current2FACode)
-                        .textContentType(.oneTimeCode)
-                        .keyboardType(.numberPad)
+                    HStack {
+                        TextField("Enter 2 Factor Code", text: $current2FACode)
+                            .keyboardType(.numberPad)
+                            .textContentType(.oneTimeCode)
+                            .submitLabel(.done)
+
+                        Button("Send Code to Phone Number") {
+                            sendFakeSMS()
+                        }
+                        .buttonStyle(.bordered)
+                        .tint(.blue)
+                        .controlSize(.small)
+                    }
                 }
 
                 Button(action: addItem) {
@@ -76,13 +87,52 @@ struct ContentView: View {
                     .onDelete(perform: deleteItems)
                 }
             }
-            .navigationTitle("Project Idea")
+            .navigationTitle("Project-Idea")
+
+            .safeAreaInset(edge: .bottom) {
+                if !expectedCode.isEmpty && current2FACode.isEmpty {
+                    Button {
+                        current2FACode = expectedCode
+                    } label: {
+                        HStack {
+                            Image(systemName: "message.fill")
+                            Text("From Messages:")
+                            Text(expectedCode).bold()
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(12)
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(12)
+                        .shadow(color: .black.opacity(0.1), radius: 5)
+                    }
+                    .padding()
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+            }
         } detail: {
             Text("Select an item")
         }
     }
 
+    private func sendFakeSMS() {
+
+        let newCode = String(Int.random(in: 100000...999999))
+        expectedCode = newCode
+
+
+        UIPasteboard.general.string = newCode
+
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+
+        print("Code is now on clipboard: \(newCode)")
+    }
+
     private func addItem() {
+
+        guard current2FACode == expectedCode else {
+            print("Incorrect code")
+            return
+        }
         withAnimation {
             let newItem = Item(
                 title: inputTitle,
@@ -96,6 +146,7 @@ struct ContentView: View {
             tempEmail = ""
             inputPassword = ""
             current2FACode = ""
+            expectedCode = ""
         }
     }
 
