@@ -185,7 +185,7 @@ struct ContentView: View {
             .replacingOccurrences(of: "http://", with: "")
             .replacingOccurrences(of: "www.", with: "")
 
-        if let firstDot = cleaned.firstIndex(of: ".") {
+        if let firstDot = cleaned.firstIndex(of: "."), firstDot != cleaned.startIndex {
             cleaned = String(cleaned[..<firstDot])
         }
 
