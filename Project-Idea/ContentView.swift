@@ -45,7 +45,7 @@ struct ContentView: View {
                                 if isTitleFocused {
                                     ScrollView(.horizontal, showsIndicators: false) {
                                         HStack(spacing: 12) {
-                                            ForEach(["Google", "Instagram", "Netflix", "Amazon", "X", "Facebook", "WhatsApp"], id: \.self) { app in
+                                            ForEach(["Google", "Instagram", "Netflix", "Amazon", "X", "Facebook", "WhatsApp", "Revolut"], id: \.self) { app in
                                                 Button(app) {
                                                     inputTitle = app
                                                     isEmailFocused = true
