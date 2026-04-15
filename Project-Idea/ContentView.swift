@@ -18,9 +18,10 @@ struct ContentView: View {
     @State private var tempEmail = ""
     @State private var expectedCode = ""
 
+    @FocusState private var isTitleFocused: Bool
     @FocusState private var isEmailFocused: Bool
     @FocusState private var is2FAFocused: Bool
-    @FocusState private var isTitleFocused: Bool
+
 
     var body: some View {
         NavigationSplitView {
