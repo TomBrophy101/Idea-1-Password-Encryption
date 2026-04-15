@@ -130,7 +130,7 @@ struct ContentView: View {
                             }
 
 
-                        Button("Send Code to Phone Number") {
+                        Button("Send Code") {
                             sendFakeSMS()
                         }
                         .buttonStyle(.bordered)
