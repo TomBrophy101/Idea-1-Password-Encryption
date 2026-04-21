@@ -78,7 +78,6 @@ struct ContentView: View {
                                         }
 
                                         Divider()
-
                                         Section("Saved Emails") {
                                             ForEach(getUniqueSavedEmails(), id: \.self) { email in
                                                 Button(email) { tempEmail = email }
@@ -153,12 +152,7 @@ struct ContentView: View {
                 Section("Saved Accounts") {
                     ForEach(items) { item in
                         NavigationLink {
-                            VStack(spacing: 20) {
-                                Text(item.title).font(.largeTitle).bold()
-                                Text(item.secureData).font(.body)
-                                Spacer()
-                            }
-                            .padding()
+                            DetailView(item: item)
                         } label: {
                             VStack(alignment: .leading) {
                                 Text(item.title)
@@ -208,52 +202,61 @@ struct ContentView: View {
 
     private func getUniqueSavedEmails() -> [String] {
         var emails = Set<String>()
+        let key = KeychainManager.getOrCreateMasterKey()
+
         for item in items {
-            let lines = item.secureData.components(separatedBy: "\n")
-            if let emailLine = lines.first(where: { $0.hasPrefix("Email: ") }) {
-                let email = emailLine.replacingOccurrences(of: "Email: ", with: "")
-                emails.insert(email)
+            if let decrypted = EncryptionManager.decrypt(item.secureData, key: key) {
+                let lines = decrypted.components(separatedBy: "\n")
+                if let emailLine = lines.first(where: { $0.hasPrefix("Email: ") }) {
+                    let email = emailLine.replacingOccurrences(of: "Email: ", with: "")
+                    emails.insert(email)
+                }
             }
         }
         return Array(emails).sorted()
     }
 
     private func sendFakeSMS() {
-        let newCode = String(Int.random(in: 100000...999999))
+        let codePair = TwoFactorService.generateCode()
 
         withAnimation {
-            expectedCode = newCode
+            expectedCode = codePair.raw
         }
 
-        UIPasteboard.general.string = newCode
+        UIPasteboard.general.string = codePair.formatted
 
         is2FAFocused = false
 
         UINotificationFeedbackGenerator().notificationOccurred(.success)
 
-        print("Code is now on clipboard: \(newCode)")
+        print("Code is now on clipboard: \(codePair)")
     }
 
     private func addItem() {
 
-        guard current2FACode == expectedCode else {
+        guard TwoFactorService.validate(current2FACode, against: expectedCode) else {
             return
         }
         withAnimation {
-            let newItem = Item(
-                title: inputTitle,
-                serviceType: "Login",
-                secureData: "Email: \(tempEmail)\nPassword: \(inputPassword)\n",
-                timestamp: Date()
-            )
-            modelContext.insert(newItem)
+            let key = KeychainManager.getOrCreateMasterKey()
+            let rawString = "Email: \(tempEmail)\nPassword: \(inputPassword)\n"
 
-            inputTitle = ""
-            tempEmail = ""
-            inputPassword = ""
-            current2FACode = ""
-            expectedCode = ""
+            if let encryptedString = EncryptionManager.encrypt(rawString, key: key) {
+                let newItem = Item(
+                    title: inputTitle,
+                    serviceType: "Login",
+                    secureData: encryptedString,
+                    timestamp: Date()
+                )
+                modelContext.insert(newItem)
+                resetFields()
+            }
         }
+    }
+
+    private func resetFields() {
+        inputTitle = ""; tempEmail = ""; inputPassword = ""; current2FACode = ""; expectedCode = ""
+        is2FAFocused = false
     }
 
     private func deleteItems(offsets: IndexSet) {

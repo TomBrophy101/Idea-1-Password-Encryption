@@ -7,14 +7,20 @@
 import Foundation
 
 struct TwoFactorService {
-    static func generateCode() -> String {
+    static func generateCode() -> (raw: String, formatted: String) {
         let code = Int.random(in : 100000...999999)
-        let codeString = String(code)
+        let raw = String(code)
 
-        let index = codeString.index(codeString.startIndex, offsetBy: 3)
-        var formatted = codeString
+        var formatted = raw
+        let index = formatted.index(formatted.startIndex, offsetBy: 3)
         formatted.insert(" ", at: index)
 
-        return formatted
+        return (raw, formatted)
+    }
+
+    static func validate(_ input: String, against expected: String) -> Bool {
+        let cleanInput = input.replacingOccurrences(of: "", with: "")
+        let cleanExpected = expected.replacingOccurrences(of: "", with: "")
+        return cleanInput == cleanExpected && !cleanInput.isEmpty
     }
 }
