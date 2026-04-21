@@ -55,11 +55,6 @@ struct DetailView: View {
         .padding()
         .navigationTitle("Account Details")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            if !isUnlocked {
-                authenticate()
-            }
-        }
     }
 
     func authenticate() {
