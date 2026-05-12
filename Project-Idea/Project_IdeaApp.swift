@@ -30,9 +30,16 @@ struct Project_IdeaApp: App {
     @State private var isUnlocked = false
     @State private var showPasswordFallback = false
 
+    @State private var isEnteringPassword = false
+
+    @State private var enteredPassword = ""
+    @State private var showIncorrectPasswordMessage = false
+
+    private let correctMasterPassword = "Brophs101!"
+
     var body: some Scene {
         WindowGroup {
-
+            //This is the overall lock screen of the app itself.
             let isUITesting = ProcessInfo.processInfo.arguments.contains("-uitesting")
             Group {
                 if !hasFinishedSplash && !isUITesting {
@@ -46,16 +53,62 @@ struct Project_IdeaApp: App {
                         Text("Program Locked")
                             .font(.headline)
 
-                        Button("Unlock with Face ID") {
+                        //This is the main method of entering the app.
+                        Button("Unlock with Face ID / Passcode") {
                             tryToUnlock()
                         }
                         .buttonStyle(.borderedProminent)
 
                         if showPasswordFallback {
-                            Button("Enter Master Password") {
-                                withAnimation { isUnlocked = true }
+                            Divider().frame(width: 200).padding()
+
+                            //If the user's face ID doesn't work or they don't know their passcode, they have to enter their master password
+                            Text("Forget Device Passcode?")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            if !isEnteringPassword {
+                                Button("Enter Master Password") {
+                                    withAnimation {
+                                        isEnteringPassword = true
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                                .padding(.top, 10)
+                            } else {
+                                VStack(spacing: 15) {
+                                    SecureField("Master Password", text: $enteredPassword)
+                                        .textFieldStyle(.roundedBorder)
+                                        .frame(maxWidth: 250)
+                                        .onSubmit {
+                                            verifyPassword()
+                                        }
+
+                                    HStack(spacing: 20) {
+                                        Button("Cancel") {
+                                            withAnimation {
+                                                isEnteringPassword = false
+                                                showIncorrectPasswordMessage = false
+                                                enteredPassword = ""
+                                            }
+                                        }
+                                        .foregroundColor(.secondary)
+
+                                        Button("Unlock") {
+                                            verifyPassword()
+                                        }
+                                        .buttonStyle(.borderedProminent)
+                                        .tint(.blue)
+                                    }
+                                    // This will show when the user enter a wrong password.
+                                    if showIncorrectPasswordMessage {
+                                        Text("Incorrect password. Try again.")
+                                            .foregroundColor(.red)
+                                            .font(.caption)
+                                    }
+                                }
+                                .padding(.top, 20)
+                                .transition(.opacity.combined(with: .move(edge: .top)))
                             }
-                            .padding(.top)
                         }
                     }
                     // .onAppear {
@@ -67,15 +120,20 @@ struct Project_IdeaApp: App {
                     //}
                 } else {
                     ContentView(onLock: {
-                        if !isUITesting { withAnimation { isUnlocked = false } }
+                        if !isUITesting {
+                            isUnlocked = false
+                        }
                     })
-                    .transition(.move(edge: .bottom))
+                    .transition(AnyTransition.move(edge: .bottom))
                 }
             }
             .onChange(of: scenePhase) { _, newPhase in
                 if newPhase == .background {
                     isUnlocked = false
                     showPasswordFallback = false
+                    isEnteringPassword = false
+                    enteredPassword = ""
+                    showIncorrectPasswordMessage = false
                 }
             }
         }
@@ -91,6 +149,23 @@ struct Project_IdeaApp: App {
                     showPasswordFallback = true
                 }
             }
+        }
+    }
+
+    private func verifyPassword() {
+        if enteredPassword == correctMasterPassword {
+            withAnimation {
+                isUnlocked = true
+            }
+            enteredPassword = ""
+            showIncorrectPasswordMessage = false
+            isEnteringPassword = false
+            showPasswordFallback = false
+        } else {
+            withAnimation {
+                showIncorrectPasswordMessage = true
+            }
+            enteredPassword = ""
         }
     }
 }
