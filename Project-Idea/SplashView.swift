@@ -17,7 +17,7 @@ struct SplashView: View {
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
-
+            //This is what the user will see when they first open the app.
             VStack(spacing: 20) {
                 Image("SplashLogo")
                     .resizable()
