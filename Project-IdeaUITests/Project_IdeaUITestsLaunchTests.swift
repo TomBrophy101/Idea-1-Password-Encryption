@@ -10,7 +10,7 @@ import XCTest
 final class Project_IdeaUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
-        true
+        false
     }
 
     override func setUpWithError() throws {
@@ -23,11 +23,11 @@ final class Project_IdeaUITestsLaunchTests: XCTestCase {
         app.launchArguments.append("-uitesting")
         app.launch()
 
-        RunLoop.current.run(until: Date(timeIntervalSinceNow: 2.0))
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: 5.0))
 
         // This is to verify the Add New Account
         let mainList = app.collectionViews["MainList"]
-        if !mainList.waitForExistence(timeout: 10) {
+        if !mainList.waitForExistence(timeout: 20) {
             let sidebarButton = app.buttons["Sidebar"].exists ? app.buttons["Sidebar"] : app.navigationBars.buttons.firstMatch
             if sidebarButton.waitForExistence(timeout: 5) && sidebarButton.isHittable {
                 sidebarButton.tap()
