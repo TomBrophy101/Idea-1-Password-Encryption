@@ -11,73 +11,72 @@ import LocalAuthentication
 struct DetailView: View {
     let item: Item
 
-    @State private var decryptedData: String?
+    @State private var email = ""
+    @State private var password = ""
+
     @State private var isUnlocked = false
+    @State private var isPasswordVisible = false
     @State private var showingError = false
+    @State private var showCopiedBanner = false
 
     var body: some View {
-        VStack(spacing: 25) {
-            Image(systemName: isUnlocked ? "lock.open.fill" : "lock.fill")
-                .font(.system(size: 60))
-                .foregroundColor(isUnlocked ? .green : .red)
-                .padding(.top, 40)
+        ZStack(alignment: .top) {
+            VStack(spacing: 25) {
+                //This is to open up the email and password and they have to use Face ID to view them
+                Image(systemName: isUnlocked ? "lock.open.fill" : "lock.fill")
+                    .font(.system(size: 60))
+                    .foregroundColor(isUnlocked ? .green : .red)
+                    .padding(.top, 40)
 
-            Text(item.title)
-                .font(.largeTitle)
-                .bold()
+                Text(item.title)
+                    .font(.largeTitle)
+                    .bold()
 
-            if isUnlocked {
-                VStack(alignment: .leading, spacing: 15) {
-                    if let data = decryptedData {
-                        Text(data)
-                            .font(.system(.body, design: .monospaced))
-                            .padding()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(Color.secondary.opacity(0.1))
-                            .cornerRadius(12)
-                            .textSelection(.enabled)
+                if isUnlocked {
+                    VStack(spacing: 20) {
+                        credentialRow(label: "Email", value: email)
+                        credentialRow(label: "Password", value: password, isSensitive: true)
 
-                        Button(action: {
-                            if let dataToCopy = decryptedData, !dataToCopy.isEmpty {
-
-                                UIPasteboard.general.string = ""
-
-                                UIPasteboard.general.string = dataToCopy
-
-                                let generator = UINotificationFeedbackGenerator()
-                                generator.prepare()
-                                generator.notificationOccurred(.success)
-
-                                print("Successfully copied: \(dataToCopy)")
-                            } else {
-                                print("Copy failed: decryptedData is empty or nil")
-                            }
-                        }) {
-                            Label("Copy to Clipboard", systemImage: "doc.on.doc.fill")
-                                .frame(maxWidth: .infinity)
-                                .padding()
+                        Button(action: openGeneralSettings) {
+                            Label("System Settings", systemImage: "gear")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
                         }
-                        .buttonStyle(.borderedProminent)
-                        .tint(.blue)
+                        .padding(.top)
                     }
-                }
-                .padding()
-            } else {
-                Text("This information is encrypted")
-                    .foregroundColor(.gray)
+                    .padding()
+                } else {
+                    Text("This information is encrypted")
+                        .foregroundColor(.gray)
 
-                Button(action: authenticate) {
-                    Label("Reveal Sensitive Data", systemImage: "faceid")
-                        .padding()
+                    Button(action: authenticate) {
+                        Label("Reveal Sensitive Data", systemImage: "faceid")
+                            .padding()
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
+
+                Spacer()
             }
+            .padding()
 
-            Spacer()
+            if showCopiedBanner {
+                Text("Copied to Clipboard")
+                    .font(.subheadline.bold())
+                    .padding(10)
+                    .background(Color.black.opacity(0.8))
+                    .foregroundColor(.white)
+                    .cornerRadius(20)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                    .padding(.top, 20)
+            }
         }
-        .padding()
         .navigationTitle("Account Details")
-        .navigationBarTitleDisplayMode(.inline)
+//        .alert("Authentication Failed", isPresented: $showingError) {
+//            Button("OK", role: .cancel) { }
+//        } message: {
+//            Text("Could not verify your identity. Please try again.")
+//        }
         //.onAppear {
         //    if !isUnlocked {
         //        authenticate()
@@ -85,7 +84,70 @@ struct DetailView: View {
         //}
     }
 
-    func authenticate() {
+    //This is to continue to have the password be only visible when the user presses the eye icon.
+    @ViewBuilder
+    private func credentialRow(label: String, value: String, isSensitive: Bool = false) -> some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(label).font(.caption).foregroundColor(.secondary)
+            HStack {
+                if isSensitive && !isPasswordVisible {
+                    Text("••••••••••••")
+                } else {
+                    Text(value).font(.system(.body, design: .monospaced))
+                }
+
+                Spacer()
+
+                //This is to continue to have the password be only visible when the user presses the eye icon.
+                if isSensitive {
+                    Button { isPasswordVisible.toggle() } label: {
+                        Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                    }
+                    .padding(.trailing, 8)
+                }
+                if !isSensitive || isPasswordVisible {
+                    Button {
+                       copyToClipboard(text: value)
+                    } label: {
+                        Image(systemName: "doc.on.doc")
+                    }
+                }
+            }
+            .padding()
+            .background(Color.secondary.opacity(0.1))
+            .cornerRadius(10)
+        }
+    }
+
+    private func copyToClipboard(text: String) {
+        print("DEBUG: Copying to clipboard: \(text)")
+
+        guard !text.isEmpty else {
+            print("DEBUG: Copy aborted - text was empty")
+            return
+        }
+
+        UIPasteboard.general.items = []
+        UIPasteboard.general.string = text
+
+        DispatchQueue.main.async {
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            generator.notificationOccurred(.success)
+
+            withAnimation {
+                showCopiedBanner = true
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation {
+                    showCopiedBanner = false
+                }
+            }
+        }
+    }
+
+    private func authenticate() {
         BiometricManager.authenticateUser { success in
             DispatchQueue.main.async {
                 if success {
@@ -97,14 +159,28 @@ struct DetailView: View {
         }
     }
 
-    func decrypt() {
+    private func decrypt() {
         let key = KeychainManager.getOrCreateMasterKey()
 
         if let decrypted = EncryptionManager.decrypt(item.secureData, key: key) {
             DispatchQueue.main.async {
-                self.decryptedData = decrypted
+                let lines = decrypted.components(separatedBy: "\n")
+                for line in lines {
+                    if line.hasPrefix("Email: ") {
+                        self.email = line.replacingOccurrences(of: "Email: ", with: "")
+                    } else if line.hasPrefix("Password: ") {
+                        self.password = line.replacingOccurrences(of: "Password: ", with: "")
+                    }
+                }
                 self.isUnlocked = true
             }
         }
     }
+
+    private func openGeneralSettings() {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+
 }
