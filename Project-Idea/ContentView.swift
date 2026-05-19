@@ -9,8 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    var onLock: () -> Void
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Item.timestamp, order: .reverse) private var items: [Item]
+
+    @State private var columnVisibility = NavigationSplitViewVisibility.all
 
     @State private var inputTitle = ""
     @State private var tempEmail = ""
@@ -28,119 +31,111 @@ struct ContentView: View {
 
 
     var body: some View {
-        NavigationSplitView {
+        NavigationSplitView(columnVisibility: $columnVisibility) {
             List {
                 //This is the bread and butter of the App.
                 Section("Add New Account") {
-                    //This is to add a website or an app of the users choosing.
-                    TextField("Web Page or App Name", text: $inputTitle)
-                        .textContentType(.URL)
-                        .keyboardType(.URL)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                        .focused($isTitleFocused)
-                        .onChange(of: inputTitle) {
-                            if inputTitle.contains(".") && !inputTitle.hasSuffix(".") {
-                                if inputTitle.lowercased().hasPrefix("http://") || inputTitle.lowercased().hasPrefix("https://") || inputTitle.lowercased().hasPrefix("www.") {
-                                    cleanURLToTitle(inputTitle)
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        TextField("Web Page or App Name", text: $inputTitle)
+                            .textContentType(.URL)
+                            .keyboardType(.URL)
+                            .autocorrectionDisabled()
+                            .textInputAutocapitalization(.never)
+                            .focused($isTitleFocused)
+                            .onChange(of: inputTitle) { _, newValue in
+                                cleanURLToTitle(newValue)
+                            }
+
+                        if isTitleFocused {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 12) {
+                                    ForEach(["Google", "Instagram", "Netflix", "Amazon", "X", "Facebook", "WhatsApp", "Revolut", "Tinder"], id: \.self) { app in
+                                        Button(app) {
+                                            inputTitle = app
+                                            isEmailFocused = true
+                                        }
+                                        .buttonStyle(.bordered)
+                                        .tint(.blue)
+                                        .controlSize(.small)
+                                    }
                                 }
+                                .padding(.vertical, 5)
                             }
                         }
-                        .toolbar {
-                            ToolbarItemGroup(placement: .keyboard) {
-                                if isTitleFocused {
-                                    ScrollView(.horizontal, showsIndicators: false) {
-                                        HStack(spacing: 12) {
-                                            ForEach(["Google", "Instagram", "Netflix", "Amazon", "X", "Facebook", "WhatsApp", "Revolut", "Tinder"], id: \.self) { app in
-                                                Button(app) {
-                                                    inputTitle = app
-                                                    isEmailFocused = true
-                                                }
-                                                .buttonStyle(.bordered)
-                                                .tint(.blue)
-                                                .controlSize(.small)
-                                            }
-                                        }
-                                        .padding(.horizontal)
+                    }
+
+                    HStack {
+                        //This is to generate a complicated email for the user.
+                        TextField("Enter Email", text: $tempEmail)
+                            .textContentType(.username)
+                            .keyboardType(.emailAddress)
+                            .autocorrectionDisabled()
+                            .textInputAutocapitalization(.never)
+                            .focused($isEmailFocused)
+
+                        Menu {
+                            Button {
+                                tempEmail = EmailService.createRandomEmail()
+                            } label: {
+                                Label("Generate Random Email", systemImage: "dice")
+                            }
+                            Divider()
+                            let savedEmails = getUniqueSavedEmails()
+                            if savedEmails.isEmpty {
+                                Text("No saved emails")
+                            } else {
+                                Section("Saved Emails") {
+                                    ForEach(getUniqueSavedEmails(), id: \.self) { email in
+                                        Button(email) { tempEmail = email }
                                     }
                                 }
                             }
+                        } label: {
+                            Image(systemName: "at.badge.plus")
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundStyle(.blue)
+                                .padding(8)
+                                .background(Color(.systemBackground))
+                                .clipShape(Circle())
                         }
-
-                    //This is to generate a complicated email for the user.
-                    TextField("Enter Email", text: $tempEmail)
-                        .textContentType(.emailAddress)
-                        .keyboardType(.emailAddress)
-                        .accessibilityIdentifier("EmailField")
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                        .focused($isEmailFocused)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .keyboard) {
-                                if isEmailFocused {
-                                    Menu {
-                                        Button(action: generateRandomEmail) {
-                                            Label("Generate Random Email", systemImage: "dice")
-                                                .foregroundStyle(.blue)
-                                        }
-
-                                        Divider()
-                                        Section("Saved Emails") {
-                                            ForEach(getUniqueSavedEmails(), id: \.self) { email in
-                                                Button(email) { tempEmail = email }
-                                            }
-                                        }
-
-                                    } label: {
-                                        Label("Email Options", systemImage: "at.badge.plus")
-                                            .fontWeight(.semibold)
-                                            .foregroundStyle(.blue)
-                                    }
-                                    Spacer()
-                                }
-                            }
-                        }
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("at.badge.plus_menu")
+                    }
 
                     //This is to create a complicated password for the user.
                     HStack(spacing: 10) {
-                        ZStack(alignment: .leading) {
+                        Group {
                             if isPasswordVisible {
                                 TextField("Enter Password", text: $inputPassword)
-                                    .textContentType(.newPassword)
-                                    .textInputAutocapitalization(.never)
-                                    .autocorrectionDisabled()
                                     .focused($isPasswordFocused)
+
                             } else {
                                 SecureField("Enter Password", text: $inputPassword)
-                                    .textContentType(.newPassword)
                                     .focused($isPasswordFocused)
                             }
                         }
-                        .transaction { transaction in
-                            transaction.animation = nil
-                        }
-                        .onChange(of: isPasswordVisible) {
-                            isPasswordFocused = true
-                        }
+                        .textContentType(.newPassword)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
 
                         Button {
                             isPasswordVisible.toggle()
+                            isPasswordFocused = true
                         } label: {
                             Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
-                                .id(isPasswordVisible ? "open" : "closed")
-                                .foregroundColor(.gray)
+                                .foregroundColor(.blue)
                                 .frame(width: 30, height: 30)
                         }
                         .buttonStyle(.plain)
 
                         Button {
-                            inputPassword = PasswordGeneratorService.generate()
+                            inputPassword = PasswordGeneratorService.generate(length: 16, includeSymbols: true, includeNumbers: true)
                             UINotificationFeedbackGenerator().notificationOccurred(.success)
                         } label: {
-                            Image(systemName: "dice.fill")
-                                .foregroundColor(.white)
+                            Image(systemName: "dice")
+                                .foregroundColor(.blue)
                                 .padding(8)
-                                .background(Color.blue)
                                 .cornerRadius(8)
                         }
                         .buttonStyle(.plain)
@@ -148,57 +143,63 @@ struct ContentView: View {
 
 
                     //This is to send the 2 factor authentication code to the supposed phone number of the user.
-                    HStack {
-                        TextField("Enter 2 Factor Code", text: $current2FACode)
-                            .keyboardType(.numberPad)
-                            .textContentType(.oneTimeCode)
-                            .focused($is2FAFocused)
-                            .submitLabel(.done)
-                            .toolbar {
-                                ToolbarItemGroup(placement: .keyboard) {
-                                    if is2FAFocused && !expectedCode.isEmpty && current2FACode.isEmpty {
-                                        Button {
-                                            withAnimation {
-                                                current2FACode = expectedCode
-                                            }
-                                        } label : {
-                                            HStack(spacing: 4) {
-                                                Image(systemName: "message.fill")
-                                                    .font(.caption)
-                                                Text("From Messages: ")
-                                                Text(expectedCode).bold()
-                                            }
-                                            .foregroundColor(.blue)
-                                            .padding(.vertical, 6)
-                                            .padding(.horizontal, 12)
-                                            .background(Color.blue.opacity(0.2))
-                                            .cornerRadius(8)
-                                        }
-                                        .frame(maxWidth: .infinity)
-                                    }
-                                }
-                            }
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            TextField("Enter 2 Factor Code", text: $current2FACode)
+                                .keyboardType(.numberPad)
+                                .textContentType(.oneTimeCode)
+                                .focused($is2FAFocused)
 
-                        Button("Send Code") {
-                            sendFakeSMS()
+                            Button("Send Code") {
+                                sendFakeSMS()
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(.blue)
+                            .controlSize(.small)
                         }
-                        .buttonStyle(.bordered)
-                        .tint(.blue)
-                        .controlSize(.small)
+
+                        if is2FAFocused && !expectedCode.isEmpty && current2FACode.isEmpty {
+                            Button {
+                                withAnimation { current2FACode = expectedCode }
+                            } label : {
+                                HStack {
+                                    Image(systemName: "message.fill")
+                                    Text("From Messages: \(expectedCode)").bold()
+                                    Spacer()
+                                }
+                                .font(.footnote)
+                                .padding(8)
+                                .background(Color.blue.opacity(0.1))
+                                .cornerRadius(8)
+                            }
+                            .buttonStyle(.plain)
+                        }
                     }
                 }
 
                 //This is to save all the information for the user.
-                Button(action: addItem) {
-                    Text("Save to Vault")
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
-                        .bold()
+                Section {
+                    HStack {
+                        Spacer()
+                        Button(action: addItem) {
+                            Text("Save to Vault")
+                                .padding(.vertical, 14)
+                                .padding(.horizontal, 64)
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .background(
+                                    Capsule()
+                                        .fill(isFormInvalid ? Color.gray.opacity(0.5) : Color.blue)
+                                )
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(isFormInvalid)
+                        Spacer()
+                    }
+                    .padding(.top, 10)
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(.blue)
                 .listRowBackground(Color.clear)
-                .disabled(inputTitle.isEmpty || inputPassword.isEmpty || tempEmail.isEmpty || current2FACode.isEmpty)
+                .listRowInsets(EdgeInsets())
 
                 Section("Saved Accounts") {
                     ForEach(items) { item in
@@ -213,48 +214,56 @@ struct ContentView: View {
                                     .foregroundColor(.gray)
                             }
                         }
+                        .padding(.vertical, 4)
                     }
                     .onDelete(perform: deleteItems)
                 }
             }
+            .accessibilityIdentifier("MainList")
             .navigationTitle("Project-Idea")
-            .navigationBarTitleDisplayMode(.automatic)
+            .background(Color(UIColor.systemGroupedBackground))
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                }
+            }
         } detail: {
             Text("Select an item")
         }
+        .navigationSplitViewStyle(.balanced)
+    }
+
+    private var isFormInvalid: Bool {
+        inputTitle.isEmpty || inputPassword.isEmpty || tempEmail.isEmpty || current2FACode.isEmpty
     }
 
     private func cleanURLToTitle(_ urlString: String) {
         let lowcased = urlString.lowercased()
 
-        var cleaned = lowcased
-            .replacingOccurrences(of: "https://", with: "")
-            .replacingOccurrences(of: "http://", with: "")
-            .replacingOccurrences(of: "www.", with: "")
+        if lowcased.contains(".") && !lowcased.hasSuffix(".") {
+            if lowcased.hasPrefix("http") || lowcased.hasPrefix("https") || lowcased.hasPrefix("www.") {
+                var cleaned = lowcased
+                    .replacingOccurrences(of: "https://", with: "")
+                    .replacingOccurrences(of: "http://", with: "")
+                    .replacingOccurrences(of: "www.", with: "")
 
-        if let firstDot = cleaned.firstIndex(of: "."), firstDot != cleaned.startIndex {
-            cleaned = String(cleaned[..<firstDot])
+                if let firstDot = cleaned.firstIndex(of: "."), firstDot != cleaned.startIndex {
+                    cleaned = String(cleaned[..<firstDot])
+                }
+                inputTitle = cleaned.capitalized
+            }
         }
-
-        let finalTitle = cleaned
-        if inputTitle != finalTitle {
-            inputTitle = finalTitle
-        }
-
     }
+
+    //This is what I used to use to make the email for the user.
+    //    private func generateRandomEmail() {
+    //        let prefix = ["user", "mail", "vault", "proxy", "hidden", "cheese", "mac", "x22", "x23", "x24", "x25", "x26"]
+    //        let domains = ["icloud.com", "fastmail.com", "gmail.com", "outlook.com", "student.ncirl.ie"]
+    //
+    //        tempEmail = "\(prefix.randomElement()!)\(Int.random(in: 100000...999999))@\(domains.randomElement()!)"
+    //    }
 
     //This is the elements to make the email for the user.
-    private func generateRandomEmail() {
-        let prefix = ["user", "mail", "vault", "proxy", "hidden", "cheese", "mac", "x22", "x23", "x24", "x25", "x26"]
-        let randomPrefix = prefix.randomElement() ?? "user"
-        let randomNumber = Int.random(in: 100000...999999)
-        let domains = ["icloud.com", "fastmail.com", "gmail.com", "outlook.com", "student.ncirl.ie"]
-
-        tempEmail = "\(randomPrefix)\(randomNumber)@\(domains.randomElement()!)"
-
-        isEmailVisible = false
-    }
-
     private func getUniqueSavedEmails() -> [String] {
         var emails = Set<String>()
         let key = KeychainManager.getOrCreateMasterKey()
@@ -263,8 +272,7 @@ struct ContentView: View {
             if let decrypted = EncryptionManager.decrypt(item.secureData, key: key) {
                 let lines = decrypted.components(separatedBy: "\n")
                 if let emailLine = lines.first(where: { $0.hasPrefix("Email: ") }) {
-                    let email = emailLine.replacingOccurrences(of: "Email: ", with: "")
-                    emails.insert(email)
+                    emails.insert(emailLine.replacingOccurrences(of: "Email: ", with: ""))
                 }
             }
         }
@@ -278,9 +286,7 @@ struct ContentView: View {
             expectedCode = codePair.raw
         }
 
-        UIPasteboard.general.string = codePair.formatted
-
-        is2FAFocused = false
+        //UIPasteboard.general.string = codePair.formatted
 
         UINotificationFeedbackGenerator().notificationOccurred(.success)
 
@@ -292,20 +298,22 @@ struct ContentView: View {
         guard TwoFactorService.validate(current2FACode, against: expectedCode) else {
             return
         }
-        withAnimation {
-            let key = KeychainManager.getOrCreateMasterKey()
-            let rawString = "Email: \(tempEmail)\nPassword: \(inputPassword)\n"
+        let key = KeychainManager.getOrCreateMasterKey()
+        let rawString = "Email: \(tempEmail)\nPassword: \(inputPassword)\n"
 
-            if let encryptedString = EncryptionManager.encrypt(rawString, key: key) {
-                let newItem = Item(
-                    title: inputTitle,
-                    serviceType: "Login",
-                    secureData: encryptedString,
-                    timestamp: Date()
-                )
-                modelContext.insert(newItem)
-                resetFields()
-            }
+        if let encryptedString = EncryptionManager.encrypt(rawString, key: key) {
+            let newItem = Item(
+                title: inputTitle,
+                serviceType: "Login",
+                secureData: encryptedString,
+                timestamp: Date()
+            )
+            modelContext.insert(newItem)
+
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
+
+            resetFields()
         }
     }
 
@@ -317,15 +325,13 @@ struct ContentView: View {
     }
 
     private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
+        for index in offsets {
+            modelContext.delete(items[index])
         }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(onLock: {})
         .modelContainer(for: Item.self, inMemory: true)
 }
