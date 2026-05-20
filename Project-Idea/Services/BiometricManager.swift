@@ -3,7 +3,8 @@
 //  
 //
 //  Created by Tom Brophy on 10/03/2026.
-//
+// This for the authentication of the user to allow them to access their data.
+
 import Foundation
 import LocalAuthentication
 
@@ -16,13 +17,15 @@ struct BiometricManager {
         if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
             let reason = "Access to your secure data is required."
 
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in DispatchQueue.main.async {
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in DispatchQueue.main.async {
                     completion(success)
                 }
             }
         } else {
             print("Biometrics not available: \(error?.localizedDescription ?? "Unknown error")")
-            completion(false)
+            DispatchQueue.main.async {
+                completion(false)
+            }
         }
     }
 }
