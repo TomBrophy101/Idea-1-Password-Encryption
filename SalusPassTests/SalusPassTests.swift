@@ -1,6 +1,6 @@
 //
-//  Project_IdeaTests.swift
-//  Project-IdeaTests
+//  SalusPassTests.swift
+//  SalusPassTests
 //
 //  Created by Tom Brophy on 10/03/2026.
 //
@@ -8,10 +8,10 @@
 import Testing
 import CryptoKit
 import Foundation
-@testable import Project_Idea
+@testable import SalusPass
 
 @MainActor
-struct Project_IdeaTests {
+struct SalusPassTests {
 
     @Test func testEncryptionCycle() async throws {
         //let manager = EncryptionManager()

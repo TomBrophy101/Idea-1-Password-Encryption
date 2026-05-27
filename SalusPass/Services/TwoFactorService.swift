@@ -1,6 +1,6 @@
 //
 //  TwoFactorService.swift
-//  
+//  SalusPass
 //
 //  Created by Tom Brophy on 10/03/2026.
 //  This is the service to implement two factor authentication.
