@@ -1,6 +1,6 @@
 //
 //  PasswordGeneratorService.swift
-//  Project-Idea
+//  SalusPass
 //
 //  Created by Tom Brophy on 22/04/2026.
 //  This is the service to create passwords.

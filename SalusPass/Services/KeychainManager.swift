@@ -1,6 +1,6 @@
 //
 //  KeychainManager.swift
-//  
+//  SalusPass
 //
 //  Created by Tom Brophy on 10/03/2026.
 //  This is to create an encryption key for the account in the program.

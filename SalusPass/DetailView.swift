@@ -1,6 +1,6 @@
 //
 //  DetailView.swift
-//  Project-Idea
+//  SalusPass
 //
 //  Created by Tom Brophy on 21/04/2026.
 //  This is the screen for the list of saved accounts.

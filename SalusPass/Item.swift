@@ -1,6 +1,6 @@
 //
 //  Item.swift
-//  Project-Idea
+//  SalusPass
 //
 //  Created by Tom Brophy on 10/03/2026.
 //  This is to save the accounts for the user.

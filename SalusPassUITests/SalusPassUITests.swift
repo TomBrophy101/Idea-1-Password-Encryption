@@ -1,13 +1,13 @@
 //
-//  Project_IdeaUITests.swift
-//  Project-IdeaUITests
+//  SalusPassUITests.swift
+//  SalusPassUITests
 //
 //  Created by Tom Brophy on 10/03/2026.
 //
 
 import XCTest
 
-final class Project_IdeaUITests: XCTestCase {
+final class SalusPassUITests: XCTestCase {
 
     let app = XCUIApplication()
 

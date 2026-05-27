@@ -1,6 +1,6 @@
 //
-//  Project_IdeaApp.swift
-//  Project-Idea
+//  SalusPassApp.swift
+//  SalusPass
 //
 //  Created by Tom Brophy on 10/03/2026.
 //  This is the lock screen of the program.
@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct Project_IdeaApp: App {
+struct SalusPassApp: App {
     @Environment(\.scenePhase) private var scenePhase
     
 

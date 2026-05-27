@@ -1,13 +1,13 @@
 //
-//  Project_IdeaUITestsLaunchTests.swift
-//  Project-IdeaUITests
+//  SalusPassUITestsLaunchTests.swift
+//  SalusPassUITestsLaunchTests
 //
 //  Created by Tom Brophy on 10/03/2026.
 //
 
 import XCTest
 
-final class Project_IdeaUITestsLaunchTests: XCTestCase {
+final class SalusPassUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         false
@@ -34,10 +34,10 @@ final class Project_IdeaUITestsLaunchTests: XCTestCase {
             }
         }
 
-        let titlePredicate = NSPredicate(format: "label CONTAINS 'Project-Idea'")
+        let titlePredicate = NSPredicate(format: "label CONTAINS 'SalusPass'")
         let universalTitle = app.descendants(matching: .any).matching(titlePredicate).firstMatch
 
-        XCTAssertTrue(universalTitle.waitForExistence(timeout: 10), "The Project-Idea title is missing.")
+        XCTAssertTrue(universalTitle.waitForExistence(timeout: 10), "The SalusPass title is missing.")
 
         //This is to verify the section header
         let sectionHeader = app.staticTexts["Add New Account"].firstMatch

@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Project-Idea
+//  SalusPass
 //
 //  Created by Tom Brophy on 10/03/2026.
 //  This is the main menu of the program.
@@ -220,7 +220,7 @@ struct ContentView: View {
                 }
             }
             .accessibilityIdentifier("MainList")
-            .navigationTitle("Project-Idea")
+            .navigationTitle("SalusPass")
             .background(Color(UIColor.systemGroupedBackground))
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {

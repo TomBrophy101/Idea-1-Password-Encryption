@@ -1,6 +1,6 @@
 //
 //  SplashView.swift
-//  Project-Idea
+//  SalusPass
 //
 //  Created by Tom Brophy on 01/04/2026.
 //  This is the opening sequence when a user opens the app before going into the lock screen.
@@ -26,7 +26,7 @@ struct SplashView: View {
                     .scaleEffect(logoScale)
                     .opacity(logoOpacity)
 
-                Text("Project-Idea")
+                Text("SalusPass")
                     .font(.system(size: 22, weight: .black, design: .rounded))
                     .foregroundColor(.blue)
                     .opacity(logoOpacity)
