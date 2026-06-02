@@ -10,7 +10,6 @@ import SwiftUI
 struct SplashView: View {
     @Binding var isFinished: Bool
 
-    @State private var isActive = false
     @State private var logoScale = 0.5
     @State private var logoOpacity = 0.0
 
@@ -19,10 +18,11 @@ struct SplashView: View {
             Color.white.ignoresSafeArea()
             //This is what the user will see when they first open the app.
             VStack(spacing: 20) {
-                Image("SplashLogo")
+                Image(systemName: "lock.shield.fill")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 120, height: 120)
+                    .foregroundColor(.blue)
                     .scaleEffect(logoScale)
                     .opacity(logoOpacity)
 
@@ -41,8 +41,6 @@ struct SplashView: View {
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 withAnimation {
-                    self.isActive = true
-
                     self.isFinished = true
                 }
             }
