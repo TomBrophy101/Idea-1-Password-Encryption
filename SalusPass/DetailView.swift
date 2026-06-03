@@ -37,10 +37,10 @@ struct DetailView: View {
                         credentialRow(label: "Email", value: email)
                         credentialRow(label: "Password", value: password, isSensitive: true)
 
-                        Button(action: openGeneralSettings) {
-                            Label("System Settings", systemImage: "gear")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+                        Button(action: openSystemPasswordsApp) {
+                            Label("Open iOS Passwords System", systemImage: "key.fill")                                .font(.footnote)
+                                .fontWeight(.medium)
+                                .foregroundColor(.blue)
                         }
                         .padding(.top)
                     }
@@ -120,14 +120,11 @@ struct DetailView: View {
     }
 
     private func copyToClipboard(text: String) {
-        print("DEBUG: Copying to clipboard: \(text)")
 
         guard !text.isEmpty else {
-            print("DEBUG: Copy aborted - text was empty")
             return
         }
 
-        UIPasteboard.general.items = []
         UIPasteboard.general.string = text
 
         DispatchQueue.main.async {
@@ -177,9 +174,15 @@ struct DetailView: View {
         }
     }
 
-    private func openGeneralSettings() {
-        if let url = URL(string: UIApplication.openSettingsURLString) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    private func openSystemPasswordsApp() {
+        if let url = URL(string: "App-Prefs:root=PASSWORDS") {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                if let fallbackUrl = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(fallbackUrl, options: [:], completionHandler: nil)
+                }
+            }
         }
     }
 

@@ -18,8 +18,8 @@ struct ContentView: View {
     @State private var inputTitle = ""
     @State private var tempEmail = ""
     @State private var inputPassword = ""
-    @State private var current2FACode = ""
-    @State private var expectedCode = ""
+    //@State private var current2FACode = ""
+    //@State private var expectedCode = ""
 
     @State private var isEmailVisible = false
     @State private var isPasswordVisible = false
@@ -27,7 +27,7 @@ struct ContentView: View {
     @FocusState private var isTitleFocused: Bool
     @FocusState private var isEmailFocused: Bool
     @FocusState private var isPasswordFocused: Bool
-    @FocusState private var is2FAFocused: Bool
+    //@FocusState private var is2FAFocused: Bool
 
 
     var body: some View {
@@ -35,7 +35,6 @@ struct ContentView: View {
             List {
                 //This is the bread and butter of the App.
                 Section("Add New Account") {
-
                     VStack(alignment: .leading, spacing: 8) {
                         TextField("Web Page or App Name", text: $inputTitle)
                             .textContentType(.URL)
@@ -141,8 +140,9 @@ struct ContentView: View {
                         .buttonStyle(.plain)
                     }
 
-
-                    //This is to send the 2 factor authentication code to the supposed phone number of the user.
+                    
+                    //This was used to send the 2 factor authentication code to the supposed phone number of the user.
+                    /**
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
                             TextField("Enter 2 Factor Code", text: $current2FACode)
@@ -175,6 +175,7 @@ struct ContentView: View {
                             .buttonStyle(.plain)
                         }
                     }
+                     **/
                 }
 
                 //This is to save all the information for the user.
@@ -223,6 +224,18 @@ struct ContentView: View {
             .navigationTitle("SalusPass")
             .background(Color(UIColor.systemGroupedBackground))
             .toolbar {
+                //Clean red lock action in the navigation header bar
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: onLock) {
+                        HStack(spacing: 4) {
+                            Image(systemName: "lock.fill")
+                            Text("Lock Out")
+                        }
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.red)
+                    }
+                }
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
                 }
@@ -234,7 +247,7 @@ struct ContentView: View {
     }
 
     private var isFormInvalid: Bool {
-        inputTitle.isEmpty || inputPassword.isEmpty || tempEmail.isEmpty || current2FACode.isEmpty
+        inputTitle.isEmpty || inputPassword.isEmpty || tempEmail.isEmpty //|| current2FACode.isEmpty
     }
 
     private func cleanURLToTitle(_ urlString: String) {
@@ -279,6 +292,7 @@ struct ContentView: View {
         return Array(emails).sorted()
     }
 
+    /*
     private func sendFakeSMS() {
         let codePair = TwoFactorService.generateCode()
 
@@ -292,12 +306,15 @@ struct ContentView: View {
 
         print("Code is now on clipboard: \(codePair)")
     }
+    */
 
     private func addItem() {
 
+        /*
         guard TwoFactorService.validate(current2FACode, against: expectedCode) else {
             return
         }
+        */
         let key = KeychainManager.getOrCreateMasterKey()
         let rawString = "Email: \(tempEmail)\nPassword: \(inputPassword)\n"
 
@@ -318,10 +335,10 @@ struct ContentView: View {
     }
 
     private func resetFields() {
-        inputTitle = ""; tempEmail = ""; inputPassword = ""; current2FACode = ""; expectedCode = ""
+        inputTitle = ""; tempEmail = ""; inputPassword = "" //current2FACode = ""; expectedCode = ""
         isEmailVisible = false
         isPasswordVisible = false
-        is2FAFocused = false
+        //is2FAFocused = false
     }
 
     private func deleteItems(offsets: IndexSet) {
