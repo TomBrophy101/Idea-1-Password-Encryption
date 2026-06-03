@@ -27,6 +27,17 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8CDA0F802FD0667E00797B56 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			dstPath = "";
+			dstSubfolder = PlugIns;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8CA6EB722F602F0400279A7B /* SalusPass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalusPass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA6EB812F602F0500279A7B /* SalusPassTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalusPassTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +128,7 @@
 				8CA6EB6E2F602F0400279A7B /* Sources */,
 				8CA6EB6F2F602F0400279A7B /* Frameworks */,
 				8CA6EB702F602F0400279A7B /* Resources */,
+				8CDA0F802FD0667E00797B56 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -177,7 +189,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2630;
+				LastSwiftUpdateCheck = 2650;
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
 					8CA6EB712F602F0400279A7B = {
