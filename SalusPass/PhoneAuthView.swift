@@ -153,7 +153,7 @@ struct PhoneAuthView: View {
                     handleValidationPipeline()
                 }
             }) {
-                Text(isCodeSent ? "Verify & Continue" : "Send Code")
+                Text(isCodeSent ? "Verify & Enter" : "Send Code")
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding()
