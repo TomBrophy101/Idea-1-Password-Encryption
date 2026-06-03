@@ -22,7 +22,7 @@ struct BiometricManager {
                 }
             }
         } else {
-            print("Biometrics not available: \(error?.localizedDescription ?? "Unknown error")")
+            print("Authentication unavailable: \(error?.localizedDescription ?? "Unknown error")")
             DispatchQueue.main.async {
                 completion(false)
             }
