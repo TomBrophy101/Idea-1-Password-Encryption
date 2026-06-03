@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "869CFA67-F117-450F-9069-BE199FBA404B",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:SalusPass.xcodeproj",
+      "identifier" : "8CA6EB712F602F0400279A7B",
+      "name" : "SalusPass"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:SalusPass.xcodeproj",
+        "identifier" : "8CA6EB802F602F0500279A7B",
+        "name" : "SalusPassTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:SalusPass.xcodeproj",
+        "identifier" : "8CA6EB8A2F602F0600279A7B",
+        "name" : "SalusPassUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
