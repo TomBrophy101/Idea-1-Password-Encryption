@@ -30,7 +30,8 @@ struct PhoneAuthView: View {
                     .foregroundColor(.blue)
 
                 Text(isCodeSent ? "Verify Your Number" : "Phone Authentication")
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .font(.system(size: 24, weight: .heavy, design: .rounded))
+                    .foregroundColor(.blue)
 
                 Text(isCodeSent ? "Enter the 6-digit code sent to \n\(phoneNumber)" : "Enter your phone number to receive a secure verification code.")
                     .font(.subheadline)
@@ -156,7 +157,8 @@ struct PhoneAuthView: View {
                 Text(isCodeSent ? "Verify & Enter" : "Send Code")
                     .font(.headline)
                     .frame(maxWidth: .infinity)
-                    .padding()
+                    .padding(.vertical, 14)
+                    .padding(.horizontal, 64)
                     .background(phoneNumber.isEmpty ? Color.blue.opacity(0.5) : Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(12)
