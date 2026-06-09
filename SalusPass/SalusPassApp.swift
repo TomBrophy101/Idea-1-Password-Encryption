@@ -60,7 +60,10 @@ struct SalusPassApp: App {
                                 .foregroundColor(.blue)
 
                             Text("Program Locked")
-                                .font(.headline)
+                                .font(.system(.headline, design: .rounded))
+                                .fontWeight(.heavy)
+                                .tracking(0.5)
+                                .foregroundColor(.blue)
 
                             //This is the main method of entering the app.
                             Button("Unlock with Face ID / Passcode") {

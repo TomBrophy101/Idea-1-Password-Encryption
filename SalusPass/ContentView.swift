@@ -221,15 +221,24 @@ struct ContentView: View {
                 }
             }
             .accessibilityIdentifier("MainList")
-            .navigationTitle("SalusPass")
+            .navigationBarTitleDisplayMode(.inline)
             .background(Color(UIColor.systemGroupedBackground))
             .toolbar {
+                //This is to center the title of the program and have the design be more consistent throughout the app.
+                ToolbarItem(placement: .principal) {
+                    HStack(spacing: 6) {
+                        Text("SalusPass")
+                            .font(.system(.headline, design: .rounded))
+                            .fontWeight(.heavy)
+                            .tracking(0.5)
+                            .foregroundColor(.blue)
+                    }
+                }
                 //Clean red lock action in the navigation header bar
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: onLock) {
                         HStack(spacing: 4) {
                             Image(systemName: "lock.fill")
-                            Text("Lock Out")
                         }
                         .font(.subheadline)
                         .fontWeight(.semibold)

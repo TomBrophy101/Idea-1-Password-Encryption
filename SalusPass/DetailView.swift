@@ -71,7 +71,7 @@ struct DetailView: View {
                     .padding(.top, 20)
             }
         }
-        .navigationTitle("Account Details")
+        .navigationBarTitleDisplayMode(.inline)
 //        .alert("Authentication Failed", isPresented: $showingError) {
 //            Button("OK", role: .cancel) { }
 //        } message: {
@@ -82,6 +82,17 @@ struct DetailView: View {
         //        authenticate()
         //    }
         //}
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                HStack(spacing: 6) {
+                    Text("Account Details")
+                        .font(.system(.headline, design: .rounded))
+                        .fontWeight(.heavy)
+                        .tracking(0.5)
+                        .foregroundColor(.blue)
+                }
+            }
+        }
     }
 
     //This is to continue to have the password be only visible when the user presses the eye icon.
