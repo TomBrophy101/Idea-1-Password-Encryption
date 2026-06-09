@@ -251,8 +251,10 @@ struct ContentView: View {
             }
         } detail: {
             Text("Select an item")
+                .foregroundColor(.secondary)
         }
         .navigationSplitViewStyle(.balanced)
+        .fontDesign(.rounded)
     }
 
     private var isFormInvalid: Bool {

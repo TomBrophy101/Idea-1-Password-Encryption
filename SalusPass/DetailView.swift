@@ -93,6 +93,7 @@ struct DetailView: View {
                 }
             }
         }
+        .fontDesign(.rounded)
     }
 
     //This is to continue to have the password be only visible when the user presses the eye icon.
@@ -104,7 +105,8 @@ struct DetailView: View {
                 if isSensitive && !isPasswordVisible {
                     Text("••••••••••••")
                 } else {
-                    Text(value).font(.system(.body, design: .monospaced))
+                    Text(value)
+                        .font(.system(.body, design: .monospaced))
                 }
 
                 Spacer()
