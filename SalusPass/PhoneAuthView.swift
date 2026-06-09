@@ -21,6 +21,10 @@ struct PhoneAuthView: View {
     @FocusState private var isPhoneFocused: Bool
     @FocusState private var isCodeFocused: Bool
 
+    private var isInputEmpty: Bool {
+        isCodeSent ? verificationCode.isEmpty : phoneNumber.isEmpty
+    }
+
     var body: some View {
         VStack(spacing: 30) {
             VStack(spacing: 10) {
@@ -147,24 +151,31 @@ struct PhoneAuthView: View {
             }
             .padding(.horizontal, 24)
 
-            Button(action: {
-                if !isCodeSent {
-                    handleSendPipeline()
-                } else {
-                    handleValidationPipeline()
+            HStack {
+                Spacer()
+                Button(action: {
+                    if !isCodeSent {
+                        handleSendPipeline()
+                    } else {
+                        handleValidationPipeline()
+                    }
+                }) {
+                    Text(isCodeSent ? "Verify & Enter" : "Send Code")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(isInputEmpty ? .secondary : .white)
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 28)
+                        .background(
+                            Capsule()
+                                .fill(isInputEmpty ? Color(.systemGray4) : Color.blue)
+                        )
                 }
-            }) {
-                Text(isCodeSent ? "Verify & Enter" : "Send Code")
-                    .font(.headline)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
-                    .padding(.horizontal, 64)
-                    .background(phoneNumber.isEmpty ? Color.blue.opacity(0.5) : Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
+                .buttonStyle(.plain)
+                .disabled(isInputEmpty)
+                Spacer()
             }
-            .disabled(phoneNumber.isEmpty)
-            .padding(.horizontal, 24)
+            .padding(.top, 10)
 
             Spacer()
         }
