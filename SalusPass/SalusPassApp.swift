@@ -60,7 +60,7 @@ struct SalusPassApp: App {
                                 .foregroundColor(.blue)
 
                             Text("Program Locked")
-                                .font(.system(.headline, design: .rounded))
+                                .font(.headline)
                                 .fontWeight(.heavy)
                                 .tracking(0.5)
                                 .foregroundColor(.blue)
@@ -70,6 +70,7 @@ struct SalusPassApp: App {
                                 tryToUnlock()
                             }
                             .buttonStyle(.borderedProminent)
+                            .fontWeight(.bold)
                             /**
                              if showPasswordFallback {
                              Divider().frame(width: 200).padding()
@@ -124,6 +125,7 @@ struct SalusPassApp: App {
                              }
                              **/
                         }
+                        .transition(.opacity)
                     }
                     // .onAppear {
                     //    if !isUnlocked {
@@ -150,17 +152,20 @@ struct SalusPassApp: App {
                     //showIncorrectPasswordMessage = false
                 }
             }
+            .fontDesign(.rounded)
         }
         .modelContainer(sharedModelContainer)
     }
 
     private func tryToUnlock() {
         BiometricManager.authenticateUser { success in
-            DispatchQueue.main.async {
-                if success {
-                    isUnlocked = true
-                } else {
-                    showPasswordFallback = true
+            Task { @MainActor in
+                withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                    if success {
+                        isUnlocked = true
+                    } else {
+                        showPasswordFallback = true
+                    }
                 }
             }
         }

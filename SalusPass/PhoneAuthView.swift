@@ -102,7 +102,7 @@ struct PhoneAuthView: View {
                 if !isCodeSent {
                     HStack {
                         Image(systemName: "phone.fill")
-                            .foregroundColor(.gray)
+                            .foregroundColor(.blue)
                         TextField("e.g. +353 87 123 4567", text: $phoneNumber)
                             .keyboardType(.phonePad)
                             .textContentType(.telephoneNumber)
@@ -115,7 +115,7 @@ struct PhoneAuthView: View {
                     VStack(spacing: 12) {
                         HStack {
                             Image(systemName: "checkmark.shield.fill")
-                                .foregroundColor(.gray)
+                                .foregroundColor(.blue)
                             TextField("6-Digit Code", text: $verificationCode)
                                 .keyboardType(.numberPad)
                                 .textContentType(.oneTimeCode)
@@ -186,6 +186,7 @@ struct PhoneAuthView: View {
         .onAppear {
             isPhoneFocused = true
         }
+        .fontDesign(.rounded)
     }
 
     private func handleSendPipeline() {
