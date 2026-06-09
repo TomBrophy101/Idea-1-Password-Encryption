@@ -27,14 +27,17 @@ struct PhoneAuthView: View {
 
     var body: some View {
         VStack(spacing: 30) {
-            VStack(spacing: 10) {
+            VStack(spacing: 12) {
                 Image(systemName: isCodeSent ? "lock.shield.fill" : "phone.circle.fill")
                     .resizable()
-                    .frame(width: 80, height: 80)
+                    .frame(width: 72, height: 72)
                     .foregroundColor(.blue)
+                    .padding(.bottom, 4)
 
                 Text(isCodeSent ? "Verify Your Number" : "Phone Authentication")
-                    .font(.system(size: 24, weight: .heavy, design: .rounded))
+                    .font(.system(size: 24, design: .rounded))
+                    .fontWeight(.heavy)
+                    .tracking(0.5)
                     .foregroundColor(.blue)
 
                 Text(isCodeSent ? "Enter the 6-digit code sent to \n\(phoneNumber)" : "Enter your phone number to receive a secure verification code.")
@@ -147,6 +150,7 @@ struct PhoneAuthView: View {
                     Text(errorMessage)
                         .font(.caption)
                         .foregroundColor(.red)
+                        .transition(.opacity)
                 }
             }
             .padding(.horizontal, 24)
@@ -161,14 +165,13 @@ struct PhoneAuthView: View {
                     }
                 }) {
                     Text(isCodeSent ? "Verify & Enter" : "Send Code")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(isInputEmpty ? .secondary : .white)
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 28)
+                        .padding(.vertical, 14)
+                        .padding(.horizontal, 64)
+                        .font(.headline)
+                        .foregroundColor(.white)
                         .background(
                             Capsule()
-                                .fill(isInputEmpty ? Color(.systemGray4) : Color.blue)
+                                .fill(isInputEmpty ? Color.gray.opacity(0.5) : Color.blue)
                         )
                 }
                 .buttonStyle(.plain)
@@ -198,7 +201,7 @@ struct PhoneAuthView: View {
 
         self.expectedCodeRaw = generatedResult.raw
 
-        withAnimation {
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
             self.isCodeSent = true
         }
 
