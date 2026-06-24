@@ -11,7 +11,7 @@ import CryptoKit
 
 struct KeychainManager {
     static func getOrCreateMasterKey() -> SymmetricKey {
-        let keyTag = "com.projectidea.masterKey"
+        let keyTag = "com.saluspass.masterKey"
 
         if let existingKeyData = loadData(key: keyTag) {
             return SymmetricKey(data: existingKeyData)
