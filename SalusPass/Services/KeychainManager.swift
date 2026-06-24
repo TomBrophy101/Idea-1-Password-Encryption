@@ -10,11 +10,15 @@ import Security
 import CryptoKit
 
 struct KeychainManager {
-    static func getOrCreateMasterKey() -> SymmetricKey {
-        let keyTag = "com.projectidea.masterKey"
+    private static let keyTag = "saluspass"
 
+    static func getOrCreateMasterKey() -> SymmetricKey {
         if let existingKeyData = loadData(key: keyTag) {
-            return SymmetricKey(data: existingKeyData)
+            if existingKeyData.count == 32 {
+                return SymmetricKey(data: existingKeyData)
+            } else {
+                deleteData(key: keyTag)
+            }
         }
 
         let newKey = SymmetricKey(size: .bits256)
@@ -58,5 +62,13 @@ struct KeychainManager {
         let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
 
         return (status == errSecSuccess) ? (dataTypeRef as? Data) : nil
+    }
+
+    private static func deleteData(key: String) {
+        let query = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key
+        ] as [String: Any]
+        SecItemDelete(query as CFDictionary)
     }
 }
