@@ -10,7 +10,7 @@ import CryptoKit
 
 struct EncryptionManager {
 
-    private static let salt = "Project-Idea-Secure-Salt-v1-992837465"
+    private static let salt = "SalusPass-Secure-Salt-v1-992837465"
 
     static func hashPassword(_ input: String) -> String {
         let saltedInput = input + salt
