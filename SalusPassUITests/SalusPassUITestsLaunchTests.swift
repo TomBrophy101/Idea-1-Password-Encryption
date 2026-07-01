@@ -15,22 +15,27 @@ final class SalusPassUITestsLaunchTests: XCTestCase {
 
     override func setUpWithError() throws {
         continueAfterFailure = false
+
+        XCUIApplication().terminate()
     }
 
     @MainActor
     func testLaunchAndVerifyUI() throws {
         let app = XCUIApplication()
+
         app.launchArguments.append("-uitesting")
         app.launch()
 
-        RunLoop.current.run(until: Date(timeIntervalSinceNow: 5.0))
+        //RunLoop.current.run(until: Date(timeIntervalSinceNow: 5.0))
 
         // This is to verify the Add New Account
         let mainList = app.collectionViews["MainList"]
-        if !mainList.waitForExistence(timeout: 20) {
-            let sidebarButton = app.buttons["Sidebar"].exists ? app.buttons["Sidebar"] : app.navigationBars.buttons.firstMatch
-            if sidebarButton.waitForExistence(timeout: 5) && sidebarButton.isHittable {
+        if !mainList.waitForExistence(timeout: 10) {
+            let sidebarButton = app.buttons["Sidebar"]
+            if sidebarButton.exists && sidebarButton.isHittable {
                 sidebarButton.tap()
+            } else if app.navigationBars.buttons.firstMatch.exists {
+                app.navigationBars.buttons.firstMatch.tap()
             }
         }
 
