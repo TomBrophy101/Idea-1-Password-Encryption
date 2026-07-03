@@ -15,6 +15,6 @@ When you want to see the details of the email and password, you can click on the
 
 To exit the main menu to go back to the lock screen simply press the red lock symbol on the right hand corner.
 
-This project is for National College Of Ireland and it is named after Salus the Roman Goddess of safety and well-being.
+This project is for National College Of Ireland and it is named after Salus the Roman Goddess of safety and well-being and it is made with XCode.
 
-Last updated: July 1st 2026.
+Last updated: July 3rd 2026.
