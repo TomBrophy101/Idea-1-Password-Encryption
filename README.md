@@ -1,4 +1,7 @@
 # SalusPass
+
+![SalusPass Logo](SalusPass.jpeg)
+
 This is a program that will create temporary email accounts for users that have or are on the verge of being hacked to not only protect their account but to allow them to keep using it along it including linking your phone number to the account. It will also save the passwords and emails in a database for future uses.
 
 The way to run this program is by connecting your iPhone to the computer. If you're using a MagSafe charger, you have to use your Mobile Hotspot via the iPhone and the MacBook to get it to work.
