@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C449D2C2FFD2E4000A73F00 /* SalusPass.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D2B2FFD2E4000A73F00 /* SalusPass.jpeg */; };
 		8CA6EBD02F604A9800279A7B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8CA6EBCF2F604A9800279A7B /* .gitignore */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8C449D2B2FFD2E4000A73F00 /* SalusPass.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SalusPass.jpeg; sourceTree = "<group>"; };
 		8CA6EB722F602F0400279A7B /* SalusPass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalusPass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA6EB812F602F0500279A7B /* SalusPassTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalusPassTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA6EB8B2F602F0600279A7B /* SalusPassUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalusPassUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +103,7 @@
 			children = (
 				8CA6EBCF2F604A9800279A7B /* .gitignore */,
 				8CA6EBCC2F6048BD00279A7B /* README.md */,
+				8C449D2B2FFD2E4000A73F00 /* SalusPass.jpeg */,
 				8CA6EB742F602F0400279A7B /* SalusPass */,
 				8CA6EB842F602F0500279A7B /* SalusPassTests */,
 				8CA6EB8E2F602F0600279A7B /* SalusPassUITests */,
@@ -231,6 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			files = (
 				8CA6EBD02F604A9800279A7B /* .gitignore in Resources */,
+				8C449D2C2FFD2E4000A73F00 /* SalusPass.jpeg in Resources */,
 			);
 		};
 		8CA6EB7F2F602F0500279A7B /* Resources */ = {
