@@ -7,7 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C2A31532FFE43AA00818B34 /* AccountDetailsUnlocked.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C2A31522FFE43AA00818B34 /* AccountDetailsUnlocked.jpeg */; };
 		8C449D2C2FFD2E4000A73F00 /* SalusPass.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D2B2FFD2E4000A73F00 /* SalusPass.jpeg */; };
+		8C449D2E2FFD36D100A73F00 /* LockMenu.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D2D2FFD36D100A73F00 /* LockMenu.jpeg */; };
+		8C449D302FFD36D700A73F00 /* LockMenuFaceID.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D2F2FFD36D700A73F00 /* LockMenuFaceID.jpeg */; };
+		8C449D342FFD36E300A73F00 /* PhoneAuthCode.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D332FFD36E300A73F00 /* PhoneAuthCode.jpeg */; };
+		8C449D362FFD36E700A73F00 /* AddNewAccount.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D352FFD36E700A73F00 /* AddNewAccount.jpeg */; };
+		8C449D382FFD36EC00A73F00 /* AccountDetailsLocked.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D372FFD36EC00A73F00 /* AccountDetailsLocked.jpeg */; };
+		8C449D3C2FFD36F500A73F00 /* GenerateRandomEmail.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D3B2FFD36F500A73F00 /* GenerateRandomEmail.jpeg */; };
+		8C449D442FFD38D900A73F00 /* PhoneAuth.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D432FFD38D900A73F00 /* PhoneAuth.jpeg */; };
+		8C449D462FFD3A2800A73F00 /* LockMenuPasscode.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D452FFD3A2800A73F00 /* LockMenuPasscode.jpeg */; };
+		8C449D482FFD3A3D00A73F00 /* SavedAccountsList.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D472FFD3A3D00A73F00 /* SavedAccountsList.jpeg */; };
 		8CA6EBD02F604A9800279A7B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8CA6EBCF2F604A9800279A7B /* .gitignore */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +50,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8C2A31522FFE43AA00818B34 /* AccountDetailsUnlocked.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AccountDetailsUnlocked.jpeg; sourceTree = "<group>"; };
 		8C449D2B2FFD2E4000A73F00 /* SalusPass.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SalusPass.jpeg; sourceTree = "<group>"; };
+		8C449D2D2FFD36D100A73F00 /* LockMenu.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LockMenu.jpeg; sourceTree = "<group>"; };
+		8C449D2F2FFD36D700A73F00 /* LockMenuFaceID.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LockMenuFaceID.jpeg; sourceTree = "<group>"; };
+		8C449D332FFD36E300A73F00 /* PhoneAuthCode.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = PhoneAuthCode.jpeg; sourceTree = "<group>"; };
+		8C449D352FFD36E700A73F00 /* AddNewAccount.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AddNewAccount.jpeg; sourceTree = "<group>"; };
+		8C449D372FFD36EC00A73F00 /* AccountDetailsLocked.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AccountDetailsLocked.jpeg; sourceTree = "<group>"; };
+		8C449D3B2FFD36F500A73F00 /* GenerateRandomEmail.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GenerateRandomEmail.jpeg; sourceTree = "<group>"; };
+		8C449D432FFD38D900A73F00 /* PhoneAuth.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = PhoneAuth.jpeg; sourceTree = "<group>"; };
+		8C449D452FFD3A2800A73F00 /* LockMenuPasscode.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LockMenuPasscode.jpeg; sourceTree = "<group>"; };
+		8C449D472FFD3A3D00A73F00 /* SavedAccountsList.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SavedAccountsList.jpeg; sourceTree = "<group>"; };
 		8CA6EB722F602F0400279A7B /* SalusPass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalusPass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA6EB812F602F0500279A7B /* SalusPassTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalusPassTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA6EB8B2F602F0600279A7B /* SalusPassUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalusPassUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +124,16 @@
 				8CA6EBCF2F604A9800279A7B /* .gitignore */,
 				8CA6EBCC2F6048BD00279A7B /* README.md */,
 				8C449D2B2FFD2E4000A73F00 /* SalusPass.jpeg */,
+				8C449D2D2FFD36D100A73F00 /* LockMenu.jpeg */,
+				8C449D2F2FFD36D700A73F00 /* LockMenuFaceID.jpeg */,
+				8C449D432FFD38D900A73F00 /* PhoneAuth.jpeg */,
+				8C449D332FFD36E300A73F00 /* PhoneAuthCode.jpeg */,
+				8C449D352FFD36E700A73F00 /* AddNewAccount.jpeg */,
+				8C2A31522FFE43AA00818B34 /* AccountDetailsUnlocked.jpeg */,
+				8C449D372FFD36EC00A73F00 /* AccountDetailsLocked.jpeg */,
+				8C449D3B2FFD36F500A73F00 /* GenerateRandomEmail.jpeg */,
+				8C449D452FFD3A2800A73F00 /* LockMenuPasscode.jpeg */,
+				8C449D472FFD3A3D00A73F00 /* SavedAccountsList.jpeg */,
 				8CA6EB742F602F0400279A7B /* SalusPass */,
 				8CA6EB842F602F0500279A7B /* SalusPassTests */,
 				8CA6EB8E2F602F0600279A7B /* SalusPassUITests */,
@@ -193,7 +223,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2650;
-				LastUpgradeCheck = 2640;
+				LastUpgradeCheck = 2660;
 				TargetAttributes = {
 					8CA6EB712F602F0400279A7B = {
 						CreatedOnToolsVersion = 26.3;
@@ -233,8 +263,18 @@
 		8CA6EB702F602F0400279A7B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
+				8C449D2E2FFD36D100A73F00 /* LockMenu.jpeg in Resources */,
+				8C449D342FFD36E300A73F00 /* PhoneAuthCode.jpeg in Resources */,
+				8C449D482FFD3A3D00A73F00 /* SavedAccountsList.jpeg in Resources */,
+				8C449D442FFD38D900A73F00 /* PhoneAuth.jpeg in Resources */,
 				8CA6EBD02F604A9800279A7B /* .gitignore in Resources */,
+				8C2A31532FFE43AA00818B34 /* AccountDetailsUnlocked.jpeg in Resources */,
+				8C449D382FFD36EC00A73F00 /* AccountDetailsLocked.jpeg in Resources */,
+				8C449D362FFD36E700A73F00 /* AddNewAccount.jpeg in Resources */,
 				8C449D2C2FFD2E4000A73F00 /* SalusPass.jpeg in Resources */,
+				8C449D3C2FFD36F500A73F00 /* GenerateRandomEmail.jpeg in Resources */,
+				8C449D462FFD3A2800A73F00 /* LockMenuPasscode.jpeg in Resources */,
+				8C449D302FFD36D700A73F00 /* LockMenuFaceID.jpeg in Resources */,
 			);
 		};
 		8CA6EB7F2F602F0500279A7B /* Resources */ = {
