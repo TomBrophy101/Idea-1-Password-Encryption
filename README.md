@@ -33,4 +33,4 @@ To exit the main menu to go back to the lock screen simply press the red lock sy
 
 This project is for National College Of Ireland and it is named after Salus the Roman Goddess of safety and well-being and it is made with XCode.
 
-Last updated: July 3rd 2026.
+Last updated: July 8th 2026.
