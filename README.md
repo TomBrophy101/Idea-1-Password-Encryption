@@ -44,7 +44,7 @@ When you want to see the details of the email and password, you can click on the
 
 To exit the main menu to go back to the lock screen simply press the red lock symbol on the right hand corner.
 
-<p align="center>
+<p align="center">
     <img src="Salus.jpeg" alt="Salus" width="180">
     <img src="NCI.jpeg" alt="NCI Logo" width="180">
     <img src="XCode.jpeg" alt="XCode Logo" width="180">
