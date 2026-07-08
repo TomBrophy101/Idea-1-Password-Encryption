@@ -44,6 +44,11 @@ When you want to see the details of the email and password, you can click on the
 
 To exit the main menu to go back to the lock screen simply press the red lock symbol on the right hand corner.
 
+<p align="center>
+    <img src="Salus.jpeg" alt="Salus" width="180">
+    <img src="NCI.jpeg" alt="NCI Logo" width="180">
+    <img src="XCode.jpeg" alt="XCode Logo" width="180">
+</p>
 This project is for National College Of Ireland and it is named after Salus the Roman Goddess of safety and well-being and it is made with XCode.
 
 Last updated: July 8th 2026.

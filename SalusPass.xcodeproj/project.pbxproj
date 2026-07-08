@@ -19,6 +19,9 @@
 		8C449D462FFD3A2800A73F00 /* LockMenuPasscode.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D452FFD3A2800A73F00 /* LockMenuPasscode.jpeg */; };
 		8C449D482FFD3A3D00A73F00 /* SavedAccountsList.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D472FFD3A3D00A73F00 /* SavedAccountsList.jpeg */; };
 		8CA6EBD02F604A9800279A7B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8CA6EBCF2F604A9800279A7B /* .gitignore */; };
+		8CB3260E2FFE658A00D549F2 /* Salus.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8CB3260D2FFE658A00D549F2 /* Salus.jpeg */; };
+		8CB326102FFE659A00D549F2 /* XCode.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8CB3260F2FFE659A00D549F2 /* XCode.jpeg */; };
+		8CB326122FFE65A200D549F2 /* NCI.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8CB326112FFE65A200D549F2 /* NCI.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,9 @@
 		8CA6EB8B2F602F0600279A7B /* SalusPassUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalusPassUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA6EBCC2F6048BD00279A7B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8CA6EBCF2F604A9800279A7B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		8CB3260D2FFE658A00D549F2 /* Salus.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Salus.jpeg; sourceTree = "<group>"; };
+		8CB3260F2FFE659A00D549F2 /* XCode.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = XCode.jpeg; sourceTree = "<group>"; };
+		8CB326112FFE65A200D549F2 /* NCI.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NCI.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -123,6 +129,9 @@
 			children = (
 				8CA6EBCF2F604A9800279A7B /* .gitignore */,
 				8CA6EBCC2F6048BD00279A7B /* README.md */,
+				8CB326112FFE65A200D549F2 /* NCI.jpeg */,
+				8CB3260F2FFE659A00D549F2 /* XCode.jpeg */,
+				8CB3260D2FFE658A00D549F2 /* Salus.jpeg */,
 				8C449D2B2FFD2E4000A73F00 /* SalusPass.jpeg */,
 				8C449D2D2FFD36D100A73F00 /* LockMenu.jpeg */,
 				8C449D2F2FFD36D700A73F00 /* LockMenuFaceID.jpeg */,
@@ -274,7 +283,10 @@
 				8C449D2C2FFD2E4000A73F00 /* SalusPass.jpeg in Resources */,
 				8C449D3C2FFD36F500A73F00 /* GenerateRandomEmail.jpeg in Resources */,
 				8C449D462FFD3A2800A73F00 /* LockMenuPasscode.jpeg in Resources */,
+				8CB326102FFE659A00D549F2 /* XCode.jpeg in Resources */,
+				8CB326122FFE65A200D549F2 /* NCI.jpeg in Resources */,
 				8C449D302FFD36D700A73F00 /* LockMenuFaceID.jpeg in Resources */,
+				8CB3260E2FFE658A00D549F2 /* Salus.jpeg in Resources */,
 			);
 		};
 		8CA6EB7F2F602F0500279A7B /* Resources */ = {
