@@ -258,7 +258,11 @@ struct ContentView: View {
     }
 
     private var isFormInvalid: Bool {
-        inputTitle.isEmpty || inputPassword.isEmpty || tempEmail.isEmpty //|| current2FACode.isEmpty
+        let trimmedTitle = inputTitle.trimmingCharacters(in: .whitespaces)
+
+        let isTitleValid = (trimmedTitle.uppercased() == "X") || (trimmedTitle.count >= 2)
+
+        return !isTitleValid || inputPassword.isEmpty || tempEmail.isEmpty //|| current2FACode.isEmpty
     }
 
     private func cleanURLToTitle(_ urlString: String) {
