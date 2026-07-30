@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8C2A31532FFE43AA00818B34 /* AccountDetailsUnlocked.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C2A31522FFE43AA00818B34 /* AccountDetailsUnlocked.jpeg */; };
+		8C3E77CA301BBA5000B27F81 /* ScreenRecording_07-10-2026 15-06-41_1.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 8C3E77C8301BBA5000B27F81 /* ScreenRecording_07-10-2026 15-06-41_1.MP4 */; };
 		8C449D2C2FFD2E4000A73F00 /* SalusPass.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D2B2FFD2E4000A73F00 /* SalusPass.jpeg */; };
 		8C449D2E2FFD36D100A73F00 /* LockMenu.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D2D2FFD36D100A73F00 /* LockMenu.jpeg */; };
 		8C449D302FFD36D700A73F00 /* LockMenuFaceID.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8C449D2F2FFD36D700A73F00 /* LockMenuFaceID.jpeg */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		8C2A31522FFE43AA00818B34 /* AccountDetailsUnlocked.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AccountDetailsUnlocked.jpeg; sourceTree = "<group>"; };
+		8C3E77C8301BBA5000B27F81 /* ScreenRecording_07-10-2026 15-06-41_1.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScreenRecording_07-10-2026 15-06-41_1.MP4"; sourceTree = "<group>"; };
 		8C449D2B2FFD2E4000A73F00 /* SalusPass.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SalusPass.jpeg; sourceTree = "<group>"; };
 		8C449D2D2FFD36D100A73F00 /* LockMenu.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LockMenu.jpeg; sourceTree = "<group>"; };
 		8C449D2F2FFD36D700A73F00 /* LockMenuFaceID.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = LockMenuFaceID.jpeg; sourceTree = "<group>"; };
@@ -124,11 +126,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C3E77C9301BBA5000B27F81 /* Demo of Program */ = {
+			isa = PBXGroup;
+			children = (
+				8C3E77C8301BBA5000B27F81 /* ScreenRecording_07-10-2026 15-06-41_1.MP4 */,
+			);
+			path = "Demo of Program";
+			sourceTree = "<group>";
+		};
 		8CA6EB692F602F0400279A7B = {
 			isa = PBXGroup;
 			children = (
 				8CA6EBCF2F604A9800279A7B /* .gitignore */,
 				8CA6EBCC2F6048BD00279A7B /* README.md */,
+				8C3E77C9301BBA5000B27F81 /* Demo of Program */,
 				8CB326112FFE65A200D549F2 /* NCI.jpeg */,
 				8CB3260F2FFE659A00D549F2 /* XCode.jpeg */,
 				8CB3260D2FFE658A00D549F2 /* Salus.jpeg */,
@@ -282,6 +293,7 @@
 				8C449D362FFD36E700A73F00 /* AddNewAccount.jpeg in Resources */,
 				8C449D2C2FFD2E4000A73F00 /* SalusPass.jpeg in Resources */,
 				8C449D3C2FFD36F500A73F00 /* GenerateRandomEmail.jpeg in Resources */,
+				8C3E77CA301BBA5000B27F81 /* ScreenRecording_07-10-2026 15-06-41_1.MP4 in Resources */,
 				8C449D462FFD3A2800A73F00 /* LockMenuPasscode.jpeg in Resources */,
 				8CB326102FFE659A00D549F2 /* XCode.jpeg in Resources */,
 				8CB326122FFE65A200D549F2 /* NCI.jpeg in Resources */,
